@@ -7,7 +7,7 @@ const ccStreamer = new WebSocket('wss://streamer.cryptocompare.com/v2?api_key=' 
 ccStreamer.on('open', function open() {
     var subRequest = {
         "action": "SubAdd",
-        "subs": ["2~Binance~BTC~USD"]
+        "subs": ["2~Binance~BTC~USDT"]
     };
     ccStreamer.send(JSON.stringify(subRequest));
     console.log("Subscribed to Binance BTC/USD");
@@ -24,13 +24,13 @@ ccStreamer.on('message', function incoming(data) {
     console.log(data.toString());
     console.log(mess);
     //console.log(mess.TYPE);
-    //console.log(mess.PRICE);
+console.log(mess.PRICE);
     //console.log(mess.MARKET);
 
     
 });
 //close the connection after 10 seconds
-setTimeout(function() {
-    ccStreamer.close(1000, "close");
-}
-, 1000);
+// setTimeout(function() {
+//     ccStreamer.close(1000, "close");
+// }
+// , 1000);
