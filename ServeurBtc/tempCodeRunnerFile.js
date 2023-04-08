@@ -1,0 +1,1 @@
+ ccStreamer.removeAllListeners();
