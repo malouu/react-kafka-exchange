@@ -1,15 +1,15 @@
 console.log("hello world")
-// this is where you paste your api key
-let apiKey = "ee46c01762545a524dc9e614b037f8e016a09c98b44d3fcfaf331ca0bf11b4a3";
+require('dotenv').config();
+let apiKey = process.env.CC_API_KEY;
 const WebSocket = require('ws');
 const ccStreamer = new WebSocket('wss://streamer.cryptocompare.com/v2?api_key=' + apiKey);
  ccStreamer.on('open', function open() {
     var subRequest = {
         "action": "SubRemove",
-        "subs": ["2~Binance~BTC~USD"]
+        "subs": ["2~Binance~BTC~USDT"]
     };
   ccStreamer.send(JSON.stringify(subRequest));
-  console.log("Unsubscribed to Binance BTC/USD");
+  console.log("Unsubscribed to Binance BTC/USDT");
  });
 ccStreamer.on('open', function open() {
     var subRequest = {
