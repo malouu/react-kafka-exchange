@@ -4,6 +4,9 @@ dependencies:
   dotenv:
     specifier: ^16.0.3
     version: 16.0.3
+  kafkajs:
+    specifier: ^2.2.4
+    version: 2.2.4
   ws:
     specifier: ^8.13.0
     version: 8.13.0
@@ -13,6 +16,11 @@ packages:
   /dotenv@16.0.3:
     resolution: {integrity: sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==}
     engines: {node: '>=12'}
+    dev: false
+
+  /kafkajs@2.2.4:
+    resolution: {integrity: sha512-j/YeapB1vfPT2iOIUn/vxdyKEuhuY2PxMBvf5JWux6iSaukAccrMtXEY/Lb7OvavDhOWME589bpLrEdnVHjfjA==}
+    engines: {node: '>=14.0.0'}
     dev: false
 
   /ws@8.13.0:
