@@ -1,5 +1,9 @@
 console.log("hello world")
 require('dotenv').config();
+
+
+const {Sender} = require("@questdb/nodejs-client");
+
 const { Kafka } = require('kafkajs')
 const kafka = new Kafka({
     clientId: 'my-app',
@@ -8,6 +12,8 @@ const kafka = new Kafka({
 let apiKey = process.env.CC_API_KEY;
 const WebSocket = require('ws');
 const producer = kafka.producer()
+const sender = new Sender({bufferSize: 4096});
+sender.connect({port: 9009, host: "localhost"});
 producer.disconnect()
 producer.connect()
 const ccStreamer = new WebSocket('wss://streamer.cryptocompare.com/v2?api_key=' + apiKey);
@@ -38,7 +44,9 @@ ccStreamer.on('message', function incoming(data) {
                     { value: message.PRICE.toString() },
                 ],
             })
-            console.log("Binance BTC/USD: " + message.PRICE);
+            sender.table("crypto-prices").symbol("instrument", "BTCUSDT").floatColumn("price", message.PRICE).atNow();
+            sender.flush();
+            console.log("Binance BTC/USDT: " + message.PRICE);
         }
     }
 

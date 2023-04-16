@@ -1,6 +1,9 @@
 lockfileVersion: '6.0'
 
 dependencies:
+  '@questdb/nodejs-client':
+    specifier: ^1.0.2
+    version: 1.0.2
   dotenv:
     specifier: ^16.0.3
     version: 16.0.3
@@ -12,6 +15,10 @@ dependencies:
     version: 8.13.0
 
 packages:
+
+  /@questdb/nodejs-client@1.0.2:
+    resolution: {integrity: sha512-b/dDhW8NYQb5fXjubtmABO0LF0e3wtmVedRrrP6jx/O1a4P083g9aHkOFaz03T0Duu408hb6OG3EakPquL3W8w==}
+    dev: false
 
   /dotenv@16.0.3:
     resolution: {integrity: sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==}
