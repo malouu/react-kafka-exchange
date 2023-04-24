@@ -2,7 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 // import WebSocket from 'websocket'
-import WebSocket from 'ws'
+// import WebSocket from 'ws'
 
 import './App.css'
 
@@ -57,25 +57,45 @@ await consumer.run({
   }*/
 
   const [price, setPrice] = useState(0)
-  const ws = new WebSocket('ws://localhost:8080/', {
-    perMessageDeflate: false
-  });
-  ws.on('open', function open() {
-    console.log('connected');
-  });
-  ws.on('message', function incoming(data) {
-    console.log(data);
-    setPrice(data)
-  });
+  const [ws, setWs] = useState(null)
+  const [color, setColor] = useState('white')
+
+  
+
+  if (!ws) {
+    const ws = new WebSocket('ws://localhost:8080/'); 
+    setWs(ws)
+    ws.onopen = function() {
+      console.log('Connection created');
+      }
+  }
+ 
+  if (ws) {
+    ws.onmessage = function (evt) { 
+      var received_msg = evt.data;
+      // console.log(received_msg );
+      if (received_msg > price) {
+        setColor('green')
+      }
+      else if (received_msg < price) {
+        setColor('red')
+      }
+      else {
+        setColor('white')
+      }
+      setPrice(received_msg)
+      };
+  }
+
 
   
  
   return (
     <div className="App">
       <h1>
-        hello
+        BTC Price
       </h1>
-      <h2>Price: {price}</h2>
+      <h2 className={color}>Price: {price}</h2>
        
     </div>
   )

@@ -31,7 +31,7 @@ wss.on('connection',async function connection(ws) {
         console.log(err);
     }
     );
-    run(ws).catch(console.error);
+   await run(ws)
 
 })
 
