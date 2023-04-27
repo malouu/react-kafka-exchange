@@ -27,12 +27,17 @@ function App() {
   
   
   useEffect(() => {
+    if(!ws) return;
     const interval = setInterval(() => {
       //si la taille de second est superiur a 20 on supprime le premier element
-      if (seconds.length > 10) {
+      if (seconds.length > 59) {
         seconds.shift()
       }
       setSeconds([...seconds,Math.floor((time / 1000) % 60)]);
+      if (data.length > 59) {
+        data.shift()
+      }
+      setData([...data,price])
     }, 1000); 
     return () => clearInterval(interval);
   }, [seconds]);
@@ -61,20 +66,35 @@ function App() {
         text: 'Chart Line',
       },
     },
+    scales: {
+      x: {    
+        display: false,
+        title: {
+          display: true,
+          text: 'Seconds'
+        }
+      },
+    },
   };
   
  /// const labels = [1,2,3,4,5,6,7,8,9];
   
   const datavisulise = {
     labels: seconds,
+  
     datasets: [
       {
         label: 'BTC/second',
         data: data,
-        borderColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgb(254, 149, 172)',
         backgroundColor: 'rgba(255, 99, 132, 0.5)',
         //hide points
         pointRadius: 0,
+        //oordonné intevalle
+        yAxisID: 'y',
+        //x axe
+        xAxisID: 'x',
+        
         //largest hight and width
         
 
@@ -104,15 +124,9 @@ function App() {
       else if (received_msg < price) {
         setColor('red')
       }
-      else {
-        setColor('black')
-      }
       setPrice(received_msg)
       
-      if (data.length > 10) {
-        data.shift()
-      }
-      setData([...data,received_msg])
+      
       };
      
   }
@@ -126,7 +140,7 @@ function App() {
         BTC Price
       </h1>
       <h2 className={color}>Price: {price}</h2>
-      <Line options={options} data={datavisulise} />;
+      <Line options={options} data={datavisulise} />
        
     </div>
   )
