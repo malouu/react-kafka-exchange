@@ -33,4 +33,4 @@ For the producer you also need to add a .env file containing your CryptoCompare 
     ```
     
 
-Go to `[http://localhost:5173](http://localhost:5173)` . Refreshing the webpage will cause the consumer to break. If this happens re run the consumer and refresh the webpage.
+Go to [http://localhost:5173](http://localhost:5173) . Refreshing the webpage will cause the consumer to break. If this happens re run the consumer and refresh the webpage.
